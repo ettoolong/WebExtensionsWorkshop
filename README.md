@@ -1,0 +1,2 @@
+# WebExtensionsWorkshop
+Example for WebExtensionsWorkshop
