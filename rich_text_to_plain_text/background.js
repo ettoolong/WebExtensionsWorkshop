@@ -29,27 +29,44 @@ const getClipData = callback => {
   document.execCommand("Paste");
 };
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if(message.action === "convertToPlainText") {
-    getClipData( text => {
-      if(text) {
-        if(addonPrefs.trimSpace) {
-          text = text.replace(/^[ \t\f]+|[ \t\f]+$/gm, "");
-        }
-        if(addonPrefs.removeEmptyLine) {
-          text = text.replace(/[\n\r]+/g, "\n");
-          text = text.replace(/\n$/,'');
-        }
-        sendResponse({action: "setClipData", text: text});
-      }
-    });
-    return true;
+const setClipData = text => {
+  let div, newRange, selection;
+  let onCopy = event => {
+    document.removeEventListener("copy", onCopy);
+    const transfer = event.clipboardData;
+    transfer.clearData();
+    transfer.setData("text/plain", text);
+    event.preventDefault();
+    div.remove();
   }
-});
+  selection = window.getSelection();
+  selection.removeAllRanges();
 
-browser.browserAction.onClicked.addListener(tab => {
-  var executing = browser.tabs.executeScript(tab.id, {
-    file: "content-script.js",
-    runAt: "document_end"
+  div = document.createElement("div");
+  div.append(new Text(text));
+  document.body.append(div);
+
+  newRange = new Range();
+  newRange.selectNodeContents(div);
+
+  selection.addRange(newRange);
+  document.addEventListener("copy", onCopy);
+  setTimeout( function () {
+    document.execCommand("copy");
+  },0);
+};
+
+chrome.browserAction.onClicked.addListener(tab => {
+  getClipData( text => {
+    if(text) {
+      if(addonPrefs.trimSpace) {
+        text = text.replace(/^[ \t\f]+|[ \t\f]+$/gm, "");
+      }
+      if(addonPrefs.removeEmptyLine) {
+        text = text.replace(/[\n\r]+/g, "\n");
+        text = text.replace(/\n$/,'');
+      }
+      setClipData(text);
+    }
   });
 });

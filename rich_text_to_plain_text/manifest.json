@@ -8,13 +8,6 @@
     "48": "icon/icon.svg"
   },
 
-  "applications": {
-    "gecko": {
-      "id": "@richtexttoplaintext",
-      "strict_min_version": "54.0a"
-    }
-  },
-
   "author": "Ett Chung",
 
   "background": {

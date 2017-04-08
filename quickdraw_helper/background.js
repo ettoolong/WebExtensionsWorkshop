@@ -1,7 +1,7 @@
 let cache = {};
 let cacheList = [];
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if(message.action === "challengetext") {
     //sendResponse({action: "setText", text: "#" + message.text + "#"});
     if(cache[message.text] === undefined) {

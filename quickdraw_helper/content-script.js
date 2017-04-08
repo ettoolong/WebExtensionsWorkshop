@@ -14,7 +14,7 @@ let config = { childList: true };
 let target = document.getElementById("challengetext-word");
 let observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
-    browser.runtime.sendMessage({action: "challengetext", text: mutation.target.textContent}).then(response => {
+    chrome.runtime.sendMessage({action: "challengetext", text: mutation.target.textContent}, response => {
       //console.log(JSON.stringify(response, null, 4));
       if(response) {
         cleanup();

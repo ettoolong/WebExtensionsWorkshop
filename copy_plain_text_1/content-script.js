@@ -6,7 +6,7 @@ function onCopy(event) {
   event.preventDefault();
 };
 
-browser.runtime.onMessage.addListener( request => {
+chrome.runtime.onMessage.addListener( request => {
   if (request.action === "copyPlainText") {
     document.addEventListener("copy", onCopy);
     document.execCommand("copy");

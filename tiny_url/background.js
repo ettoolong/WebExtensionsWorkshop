@@ -1,11 +1,38 @@
 //Create short URL
 const showNotification = message => {
-  browser.notifications.create("TinyUrl", {
+  chrome.notifications.create("TinyUrl", {
     "type": "basic",
     "iconUrl": "icon/icon.svg",
     "title": "Tiny URL",
     "message": message
   });
+};
+
+const setClipData = text => {
+  let div, newRange, selection;
+  let onCopy = event => {
+    document.removeEventListener("copy", onCopy);
+    const transfer = event.clipboardData;
+    transfer.clearData();
+    transfer.setData("text/plain", text);
+    event.preventDefault();
+    div.remove();
+  }
+  selection = window.getSelection();
+  selection.removeAllRanges();
+
+  div = document.createElement("div");
+  div.append(new Text(text));
+  document.body.append(div);
+
+  newRange = new Range();
+  newRange.selectNodeContents(div);
+
+  selection.addRange(newRange);
+  document.addEventListener("copy", onCopy);
+  setTimeout( function () {
+    document.execCommand("copy");
+  },0);
 };
 
 const makeShortURL = (long_url, callback) => {
@@ -33,29 +60,19 @@ const makeShortURL = (long_url, callback) => {
   request.send();
 };
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if(message.action === "tinyUrl") {
-    makeShortURL( message.long_url, short_url => {
-      sendResponse({action: "setClipData", short_url: short_url});
-    });
-    return true;
-  }
-});
-
-browser.pageAction.onClicked.addListener(tab => {
-  var executing = browser.tabs.executeScript(tab.id, {
-    file: "content-script.js",
-    runAt: "document_end"
+chrome.pageAction.onClicked.addListener(tab => {
+  makeShortURL( tab.url, short_url => {
+    setClipData(short_url);
   });
 });
 
-browser.tabs.onUpdated.addListener( (tabId, changeInfo, tab) => {
-  browser.tabs.get(tabId).then(tab => {
+chrome.tabs.onUpdated.addListener( (tabId, changeInfo, tab) => {
+  chrome.tabs.get(tabId, tab => {
     if(tab.url.length <= 26) {
-      browser.pageAction.hide(tab.id);
+      chrome.pageAction.hide(tab.id);
     }
     else {
-      browser.pageAction.show(tab.id);
+      chrome.pageAction.show(tab.id);
     }
   });
 });

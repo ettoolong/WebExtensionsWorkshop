@@ -8,13 +8,6 @@
     "48": "icon/icon.png"
   },
 
-  "applications": {
-    "gecko": {
-      "id": "@quickdraw-helper",
-      "strict_min_version": "48.0"
-    }
-  },
-
   "author": "Ett Chung",
 
   "background": {

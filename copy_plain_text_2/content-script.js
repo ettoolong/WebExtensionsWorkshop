@@ -15,10 +15,10 @@ function onCopy(event) {
   event.preventDefault();
 };
 
-browser.runtime.onMessage.addListener( request => {
+chrome.runtime.onMessage.addListener( request => {
   if (request.action === "copyPlainText") {
 
-    browser.storage.local.get().then(results => {
+    chrome.storage.local.get(results => {
       if ((typeof results.length === "number") && (results.length > 0)) {
         results = results[0];
       }

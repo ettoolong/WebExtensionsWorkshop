@@ -4,13 +4,6 @@
   "name": "Hello World",
   "version": "1.0.0",
 
-  "applications": {
-    "gecko": {
-      "id": "helloWorld@ettoolong",
-      "strict_min_version": "48.0"
-    }
-  },
-
   "author": "Ett Chung",
 
   "background": {
