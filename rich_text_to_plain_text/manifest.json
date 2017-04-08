@@ -1,0 +1,37 @@
+{
+  "description": "Convert clipboard's text to plain text.",
+  "manifest_version": 2,
+  "name": "Rich text to plain text",
+  "version": "1.0.0",
+
+  "icons": {
+    "48": "icon/icon.svg"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "@richtexttoplaintext",
+      "strict_min_version": "54.0a"
+    }
+  },
+
+  "author": "Ett Chung",
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "Rich text to plain text",
+    "default_icon": "icon/icon.svg"
+  },
+
+  "permissions": [
+    "<all_urls>",
+    "clipboardRead",
+    "clipboardWrite"
+  ]
+}

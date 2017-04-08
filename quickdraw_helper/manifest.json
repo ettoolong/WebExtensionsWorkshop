@@ -1,0 +1,41 @@
+{
+  "description": "Auto translate challenge text on site: https://quickdraw.withgoogle.com",
+  "manifest_version": 2,
+  "name": "Quickdraw helper",
+  "version": "1.0.0",
+
+  "icons": {
+    "48": "icon/icon.png"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "@quickdraw-helper",
+      "strict_min_version": "48.0"
+    }
+  },
+
+  "author": "Ett Chung",
+
+  "background": {
+    "scripts": [
+      "background.js",
+      "google-translate.js"
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://quickdraw.withgoogle.com/*"],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+
+  "permissions": [
+    "https://translate.google.com/*"
+  ]
+}

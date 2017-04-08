@@ -1,0 +1,38 @@
+{
+  "description": "Make short URL by TinyURL service.",
+  "manifest_version": 2,
+  "name": "Tiny Url",
+  "version": "1.0.0",
+
+  "icons": {
+    "48": "icon/icon.svg"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "@tinyurl",
+      "strict_min_version": "52.0"
+    }
+  },
+
+  "author": "Ett Chung",
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+
+  "page_action": {
+    "browser_style": true,
+    "default_title": "Tiny url",
+    "default_icon": "icon/icon-white.svg"
+  },
+
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "clipboardWrite",
+    "notifications"
+  ]
+}

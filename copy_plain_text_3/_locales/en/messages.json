@@ -1,0 +1,22 @@
+{
+	"extName": {
+		"message": "Copy Plain Text",
+		"description": ""
+	},
+	"extDescription": {
+		"message": "Copies text without formatting.",
+		"description": ""
+	},
+	"preferencesLabel": {
+		"message": "Preferences:",
+		"description": ""
+	},
+	"trimSpaceLabel": {
+		"message": "Trim space around text",
+		"description": ""
+	},
+	"removeEmptyLineLabel": {
+		"message": "Remove empty line",
+		"description": ""
+	}
+}

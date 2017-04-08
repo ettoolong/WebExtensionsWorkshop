@@ -1,0 +1,30 @@
+{
+  "description": "My first WebExtension",
+  "manifest_version": 2,
+  "name": "Hello World",
+  "version": "1.0.0",
+
+  "applications": {
+    "gecko": {
+      "id": "helloWorld@ettoolong",
+      "strict_min_version": "48.0"
+    }
+  },
+
+  "author": "Ett Chung",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

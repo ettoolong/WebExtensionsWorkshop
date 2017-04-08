@@ -1,0 +1,22 @@
+{
+	"extName": {
+		"message": "Copy Plain Text",
+		"description": ""
+	},
+	"extDescription": {
+		"message": "複製選取的內容為無格式文字。",
+		"description": ""
+	},
+	"preferencesLabel": {
+		"message": "偏好設定：",
+		"description": ""
+	},
+	"trimSpaceLabel": {
+		"message": "移除每行文字前後的空白",
+		"description": ""
+	},
+	"removeEmptyLineLabel": {
+		"message": "移除多餘的換行",
+		"description": ""
+	}
+}
